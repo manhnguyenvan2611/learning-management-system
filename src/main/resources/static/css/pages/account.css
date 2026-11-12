@@ -1,0 +1,137 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+}
+
+/**
+* user information section
+*/
+.userInfor {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.userInfor__details{
+    width: 73.02%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+}
+
+.userInfor__details__avatar {
+    width: 150px;
+    height: 150px;
+    border: var(--bd1);
+    border-radius: var(--bdr20);
+}
+
+.userInfor__details__avatar__img {
+    border-radius: var(--bdr20);
+}
+
+.userInfor__details__personal {
+    width: calc(100% - 20px - 200px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/*h2*/
+.user__name__heading {
+    font-size: var(--fonts24);
+    font-weight: var(--fontw--semibold);
+    text-transform: uppercase;
+}
+
+/*h3*/
+.user__grade,
+.user__level {
+    font-size: var(--fonts24);
+    color: var(--comp--purple);
+}
+
+.userInfor__nav {
+    width: 73.02%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.userInfor__nav__btn {
+    padding: 0 20px;
+    height: 50px;
+    border-radius: var(--bdr20);
+    background: var(--bg);
+    flex-shrink: 0;
+}
+
+.userInfor__nav__btn:hover {
+    background: var(--comp--purple);
+}
+
+.userInfor__edit__btn {
+    width: 100%;
+    height: 50px;
+    font-weight: var(--fontw--medium);
+    background: var(--comp--purple);
+    border-radius: var(--bdr20);
+}
+
+
+.courses {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    padding: 50px 20px;
+    border: var(--bd1);
+    border-radius: var(--bdr20);
+}
+
+@media (max-width: 1186px) {
+    .userInfor {
+        width: 80%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .userInfor {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .userInfor__details, 
+    .userInfor__nav {
+        width: 100%;
+    }
+
+    .userInfor {
+        width: 100%;
+    }
+
+    .userInfor__nav {
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+}
+
+@media (max-width: 480px) {
+    .userInfor__details {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .userInfor__details__personal {
+        width: 100%;
+        align-items: center;
+    }
+}
+

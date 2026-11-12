@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --bg: #FFFFFF;
+    --comp--green: #00FF7F;
+    --comp--purple: #9DA7E6;
+    --comp--red: #DC143C;
+    --bd1: 1px solid rgba(0,0,0,0.5);
+    --bdr20: 20px;
+    --fonts50: 50px;
+    --fonts30: 30px;
+    --fonts24: 24px;
+    --fonts18: 18px;
+    --fonts16: 16px;
+    --fonts12: 12px;
+    --fontw--bold: 750; 
+    --fontw--semibold: 650; 
+    --fontw--medium: 450; 
+    --fontcl--black: black;
+    --fontcl--white: white;
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" 
+    xmlns:th="https://www.thymeleaf.org/"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/variables.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/components/header.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/components/icons.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/pages/classes.css}" />
+    <script th:src="@{/js/layout/header.js}" defer></script>
+    <script th:src="@{/js/classes.js}" defer></script>
+    <script th:src="@{/js/javascript.js}" defer></script>
+    <title>Header</title>
+</head>
+<body>
+    <script th:inline="javascript">
+        let enrolledUsers = /*[[${enrolledUsers}]]*/[];
+        let courses = /*[[${courses}]]*/[];
+    </script>
+    <header class="header">
+        <button class="header__menu__btn">
+            <img class="icon-medium" src="/assets/icons/menu.png" alt="menu"/>
+        </button>
+        <nav class="header__nav nav-left">
+            <a class="header__nav__link" th:href="@{/}">HOME</a>
+            <a class="header__nav__link" href="">ABOUT US</a>
+            <a class="header__nav__link" href="">CONTACT US</a>
+        </nav>
+        <nav class="header__nav">
+            <a class="header__nav__link" th:href="@{/signup}" sec:authorize="isAnonymous()">SIGN UP</a>
+            <a class="header__nav__link" th:href="@{/login}" sec:authorize="isAnonymous()">LOG IN</a>
+            <a class="header__nav__link account-link" th:href="@{/account}" sec:authorize="isAuthenticated()">ACCOUNT</a>
+            <a class="header__nav__link class-link" th:href="@{/classes}" sec:authorize="hasRole('LECTURER')">CLASS</a>
+            <a class="header__nav__link logout-link" th:href="@{/logout}" sec:authorize="isAuthenticated()">LOG OUT</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="classList">
+            <div class="classList__courseInfor">
+                <h2 class="classList__courseInfor__heading">30 Students</h2>
+                <button class="classList__courseInfor__more">Course Information</button>
+            </div>
+            <nav class="classList__nav">
+                <button class="classList__nav__navigateBtn" id="list-left">
+                    <img class="icon-medium" th:src="@{/assets/icons/arrow-left.png}" alt="left arrow"/>
+                </button>
+                <button class="classList__nav__navigateBtn" id="list-right">
+                    <img class="icon-medium" th:src="@{/assets/icons/arrow-right.png}" alt="right arrow"/>
+                </button>
+
+                <div class="classList__nav__btns">
+                    <button class="classList__nav__btn">Course 1</button>
+                    <button class="classList__nav__btn">Course 2</button>
+                    <button class="classList__nav__btn">Course 3</button>
+                    <button class="classList__nav__btn">Course 4</button>
+                    <button class="classList__nav__btn">Course 5</button>
+                </div>
+            </nav>
+
+            <div class="classList__students">
+                <!-- <div class="classList__students__student">
+                    <div class="student__appearence">
+                        <div class="student__appearence__avatar">
+                            <img class="student__avatar__img" src="" alt="avatar"/>
+                        </div>
+                        <h4 class="student__name">
+                            User name 
+                        </h4>
+                    </div>
+
+                    <div class="student__contact">
+                        <span class="student__learning__status">in progress</span>
+                        <h4 class="student__email">123@gmail.com</h4>
+                    </div>
+                </div>
+                <div class="classList__students__student">
+                    <div class="student__appearence">
+                        <div class="student__appearence__avatar">
+                            <img class="student__avatar__img" src="" alt="avatar"/>
+                        </div>
+                        <h4 class="student__name">
+                            User name 
+                        </h4>
+                    </div>
+
+                    <div class="student__contact">
+                        <span class="student__learning__status">in progress</span>
+                        <h4 class="student__email">123@gmail.com</h4>
+                    </div>
+                </div>
+                <div class="classList__students__student">
+                    <div class="student__appearence">
+                        <div class="student__appearence__avatar">
+                            <img class="student__avatar__img" src="" alt="avatar"/>
+                        </div>
+                        <h4 class="student__name">
+                            User name 
+                        </h4>
+                    </div>
+
+                    <div class="student__contact">
+                        <span class="student__learning__status">in progress</span>
+                        <h4 class="student__email">123@gmail.com</h4>
+                    </div>
+                </div>
+                <div class="classList__students__student">
+                    <div class="student__appearence">
+                        <div class="student__appearence__avatar">
+                            <img class="student__avatar__img" src="" alt="avatar"/>
+                        </div>
+                        <h4 class="student__name">
+                            User name 
+                        </h4>
+                    </div>
+
+                    <div class="student__contact">
+                        <span class="student__learning__status">in progress</span>
+                        <h4 class="student__email">123@gmail.com</h4>
+                    </div>
+                </div> -->
+
+            </div>
+        </section>
+
+        <section class="courseInfor">
+            <h2 class="courseInfor__heading">Course Name</h2>
+            <div class="courseInfor__details">
+                <time class="courseInfor__details__term">Updated on Feb, 2026</time>
+                <div class="courseInfor__details__term">Language: English</div>
+                <div class="courseInfor__details__term">Author: Phani Avagaddi</div>
+                <div class="courseInfor__details__term">IT and Software ,Other IT and Software, Python</div>
+                <div class="courseInfor__details__term">
+                    <span>4.6</span>
+                    <img class="icon-small" th:src="@{/assets/icons/star.png}" alt="star"/>
+                </div>
+            </div>
+            <div class="courseInfor__thumbnail">
+                <img class="thumbnail__img" src="" alt="thumbnail"/>
+            </div>
+
+            <button class="courseInfor__close__btn">Close</button>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" 
+    xmlns:th="https://www.thymeleaf.org/"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/variables.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/components/header.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/components/icons.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/pages/signup.css}" />
+    <script th:src="@{/js/layout/header.js}" defer></script>
+    <script th:src="@{/js/modules/showpass.js}" defer></script>
+    <script th:src="@{/js/javascript.js}" defer></script>
+    <title>Login</title>
+</head>
+<body>
+    <header class="header">
+        <button class="header__menu__btn">
+            <img class="icon-medium" src="/assets/icons/menu.png" alt="menu"/>
+        </button>
+        <nav class="header__nav nav-left">
+            <a class="header__nav__link" th:href="@{/}">HOME</a>
+            <a class="header__nav__link" href="">ABOUT US</a>
+            <a class="header__nav__link" href="">CONTACT US</a>
+        </nav>
+        <nav class="header__nav">
+            <a class="header__nav__link" th:href="@{/signup}" sec:authorize="isAnonymous()">SIGN UP</a>
+            <a class="header__nav__link" th:href="@{/login}" sec:authorize="isAnonymous()">LOG IN</a>
+            <a class="header__nav__link account-link" th:href="@{/account}" sec:authorize="isAuthenticated()">ACCOUNT</a>
+            <a class="header__nav__link class-link" th:href="@{/classes}" sec:authorize="hasRole('LECTURER')">CLASS</a>
+            <a class="header__nav__link logout-link" th:href="@{/logout}" sec:authorize="isAuthenticated()">LOG OUT</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1 class="signup__heading">Login</h1>
+		<div th:if="${param.error}">
+			Invalid email and password.</div>
+		<div th:if="${param.logout}">
+			You have been logged out.</div>
+        <form class="signup__form" th:action="@{/login}" method="POST">
+            <button class="show__password__btn" type="button">
+                <img class="icon-medium eye__img" th:src="@{/assets/icons/eye-close.png}" alt="show password"/>
+            </button>
+            <input class="signup__form__input" type="email" name="email" placeholder="Email" required/>
+            <input class="signup__form__input input__password" type="password" name="password" placeholder="Password" required/>
+            <button class="signup__form__submitBtn" type="submit">Log in</button>
+        </form>
+    </main>
+</body>
+</html>

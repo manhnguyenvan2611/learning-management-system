@@ -1,0 +1,254 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.backgroundImage {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: fit-content;
+    top: -100px;
+}
+
+/**
+* hero section
+*/
+.heroSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+/*h1*/
+.heroSection__heading {
+    font-size: var(--fonts50);
+    font-weight: var(--fontw--semibold);
+    width: 80%;
+    text-align: center;
+}
+
+.heroSection__cta {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.heroSection__cta__para {
+    width: 154px;
+    display: flex;
+    flex-direction: column;
+}
+
+.heroSection__cta__para h3 {
+    font-size: var(--fonts18);
+    font-weight: var(--fontw--semibold);
+    text-transform: uppercase;
+}
+
+.heroSection__cta__btn {
+    padding: 0 20px;
+    height: 50px;
+    border-radius: var(--bdr20);
+    background: var(--comp--purple);
+    font-weight: var(--fontw--semibold);
+    font-size: var(--fonts18);
+}
+
+.heroSection__banners {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.heroSection__banners__image {
+    aspect-ratio: 2 / 3;
+}
+
+.heroSection__banners__image:nth-child(1),
+.heroSection__banners__image:nth-child(5) {
+    /* width: 100px; */
+    width: 8.58%;
+}
+
+.heroSection__banners__image:nth-child(2),
+.heroSection__banners__image:nth-child(4) {
+    /* width: 150px; */
+    width: 12.86%;
+}
+
+.heroSection__banners__image:nth-child(3) {
+    /* width: 200px; */
+    width: 17.15%;
+}
+
+.heroSection__banners__image__img {
+    border-radius: var(--bdr20);
+}
+
+/**
+* course section
+*/
+.courseSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    padding: 50px 20px;
+    border: var(--bd1);
+    border-radius: var(--bdr20);
+}
+
+.courseSection__title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+/*h3*/
+.courseSection__title__heading {
+    font-size: var(--fonts30);
+    font-weight: var(--fontw--semibold);
+}
+
+.courseSection__title__para {
+    width: 35.52%;
+    text-align: center;
+}
+
+.courseSection__slideContainer {
+    width: 100%;
+    position: relative;
+}
+
+.coursesBtns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    top: calc((100% - 50px) / 2);
+    display: none;
+}
+
+.courseSection__slideContainer:hover 
+.coursesBtns {
+    display: flex;
+}
+
+.coursesBtn {
+    width: 50px;
+    height: 100%;
+    border-radius: var(--bdr20);
+    background: var(--comp--purple);
+}
+
+/*h5*/
+.courseSection__quote {
+    font-size: var(--fonts30);
+    font-weight: var(--fontw--semibold);
+    text-align: center;
+    width: 36.68%;
+}
+
+@media (min-width: 1366px) {
+    .heroSection__heading {
+        width: 60%;
+    }
+
+    .heroSection {
+        gap: 100px;
+    }
+
+}
+
+@media (max-width: 1024px) {
+    .courseSection__quote {
+        width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroSection__banners__image:nth-child(1),
+    .heroSection__banners__image:nth-child(5) {
+        display: none;
+    }
+
+    .heroSection__banners__image:nth-child(2),
+    .heroSection__banners__image:nth-child(4) {
+        /* width: 150px; */
+        width: 20%;
+    }
+
+    .heroSection__banners__image:nth-child(3) {
+        /* width: 200px; */
+        width: 30%;
+    }
+
+    .heroSection__heading {
+        font-size: var(--fonts30);
+    }
+
+    .courseSection__title {
+        flex-direction: column;
+        gap: 10px;
+        justify-content: unset;
+    }
+
+    .courseSection__title__para {
+        width: 100%;
+    }
+
+    .courseSection__quote {
+        width: 80%;
+        font-size: var(--fonts24);
+    }
+}
+
+@media (max-width: 480px) {
+    .backgroundImage {
+        display: none;
+    }
+
+    .heroSection {
+        gap: 50px;
+    }
+
+    .heroSection__heading {
+        width: 100%;
+    }
+
+    .heroSection__cta__para span,
+    .heroSection__cta__para h3 {
+        font-size: var(--fonts12);
+    }
+
+    .heroSection__cta__btn {
+        height: 30px;
+        font-size: var(--fonts12);
+    }
+
+    .heroSection__banners {
+        gap: 10px;
+    }
+
+    .heroSection__banners__image:nth-child(2),
+    .heroSection__banners__image:nth-child(4) {
+        width: calc((100% - 40% - 20px) / 2);
+    }
+
+    .heroSection__banners__image:nth-child(3) {
+        width: 40%;
+    }
+}

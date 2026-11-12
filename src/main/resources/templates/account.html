@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" 
+    xmlns:th="https://www.thymeleaf.org/"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/variables.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/components/header.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/components/icons.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/components/course.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/pages/account.css}" />
+    <script th:src="@{/js/layout/header.js}" defer></script>
+    <script th:src="@{/js/modules/slidescrolling.js}" defer></script>
+    <script th:src="@{/js/modules/calculateprogress.js}" defer></script>
+    <script th:src="@{/js/account.js}" defer></script>
+    <script th:src="@{/js/javascript.js}" defer></script>
+    <title>Header</title>
+</head>
+<body>
+    <script th:inline="javascript">
+        let userLessons = /*[[${userLessons}]]*/[];
+        let enrollments = /*[[${enrollments}]]*/[];
+        let courses = /*[[${courses}]]*/[];
+    </script>
+    <header class="header">
+        <button class="header__menu__btn">
+            <img class="icon-medium" src="/assets/icons/menu.png" alt="menu"/>
+        </button>
+        <nav class="header__nav nav-left">
+            <a class="header__nav__link" th:href="@{/}">HOME</a>
+            <a class="header__nav__link" href="">ABOUT US</a>
+            <a class="header__nav__link" href="">CONTACT US</a>
+        </nav>
+        <nav class="header__nav">
+            <a class="header__nav__link" th:href="@{/signup}" sec:authorize="isAnonymous()">SIGN UP</a>
+            <a class="header__nav__link" th:href="@{/login}" sec:authorize="isAnonymous()">LOG IN</a>
+            <a class="header__nav__link account-link" th:href="@{/account}" sec:authorize="isAuthenticated()">ACCOUNT</a>
+            <a class="header__nav__link class-link" th:href="@{/classes}" sec:authorize="hasRole('LECTURER')">CLASS</a>
+            <a class="header__nav__link logout-link" th:href="@{/logout}" sec:authorize="isAuthenticated()">LOG OUT</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="userInfor">
+            <div class="userInfor__details">
+                <div class="userInfor__details__avatar">
+                    <img class="userInfor__details__avatar__img" src="" alt="avatar"/>
+                </div>
+
+                <div class="userInfor__details__personal">
+                    <h2 class="user__name__heading" th:text="${userName}">USER NAME</h2>
+                    <h3 class="user__grade" th:text="'Grade ' + ${userScore}">Grade 120</h3>
+                    <h3 class="user__level" th:text="'Level ' + ${currentLevel}">Level 2</h3>
+                </div>
+            </div>
+
+            <!-- <nav class="userInfor__nav">
+                <button class="userInfor__nav__btn">Learning course</button>
+                <button class="userInfor__nav__btn">Learned course</button>
+            </nav> -->
+
+            <button class="userInfor__edit__btn">Edit Profile</button>
+        </section>
+
+        <section class="courses">
+            <div class="courseSection__slideContainer">
+                <div class="coursesBtns">
+                    <button class="coursesBtn courseBtn-left" id="courseBtn-left">
+                        <img class="icon-medium" th:src="@{/assets/icons/arrow-left.png}" alt="move left"/>
+                    </button>
+                    <button class="coursesBtn coursesBtn-right" id="courseBtn-right">
+                        <img class="icon-medium" th:src="@{/assets/icons/arrow-right.png}" alt="move right"/>
+                    </button>
+                </div>
+                <div class="courseSection__slideContainer__courses">
+                    <div class="courseSection__slideContainer__course" th:each="course:${courses}">
+                        <div class="course__level">
+                            <h4 class="course__level__heading" th:text="Level + ' ' + ${course.level}">Level 1</h4>
+                            <a class="course__level__link" th:href="@{/lessons/{id}(id=${course.id})}" 
+                                th:attr="onclick=|localStorage.setItem('courseId', ${course.id})|">
+                                <button class="course__level__redirectBtn">
+                                    <img class="icon-medium" th:src="@{/assets/icons/arrow-diagonal.png}" alt="redirect"/>
+                                </button>
+                            </a>
+                        </div>
+
+                        <div class="course__infor">
+                            <h5 class="course__infor__name" th:text="${course.course_name}">
+                                course name
+                            </h5>
+                            <time class="course__infor__time" th:text="${course.timestamp}">Updated on Feb 2026</time>
+                            <div class="course__infor__language">Language: English</div>
+                            <div class="course__infor__author">Author: Phani Avagaddi</div> 
+                            <div class="course__infor__category" th:text="${course.description}">
+                                IT and Software ,Other IT and Software, Python
+                            </div> 
+                            <div class="course__infor__rating">
+                                <span th:text="${course.rate}">4.6</span>
+                                <img class="icon-small" th:src="@{/assets/icons/star.png}" alt="star"/>
+                            </div>
+                            <div class="course__infor__progressBar" sec:authorize="isAuthenticated()">
+                                <progress class="course__infor__progressBar__progress" th:classappend="progress-course- + ${course.id}" value="50" max="100"></progress>
+                                <span class="progress-value" th:classappend="progress-value- + ${course.id}">50%</span>
+                            </div>
+                        </div>
+
+                        <div class="course__thumbnail">
+                            <img class="course__thumbnail__img" th:src="@{'/assets/courses/' + ${course.thumbnail}}" alt="course thumbnail"/>
+                        </div>
+                    </div>
+
+                    <!-- <div class="courseSection__slideContainer__course">
+                        <div class="course__level">
+                            <h4 class="course__level__heading">Level 1</h4>
+                            <button class="course__level__redirectBtn">
+                                <img class="icon-medium" th:src="@{/assets/icons/arrow-diagonal.png}" alt="redirect"/>
+                            </button>
+                        </div>
+
+                        <div class="course__infor">
+                            <h5 class="course__infor__name">
+                                course name
+                            </h5>
+                            <time class="course__infor__time">Updated on Feb 2026</time>
+                            <div class="course__infor__language">Language: English</div>
+                            <div class="course__infor__author">Author: Phani Avagaddi</div> 
+                            <div class="course__infor__category">
+                                IT and Software ,Other IT and Software, Python
+                            </div> 
+                            <div class="course__infor__rating">
+                                <span>4.6</span>
+                                <img class="icon-small" th:src="@{/assets/icons/star.png}" alt="star"/>
+                            </div>
+                            <div class="course__infor__progressBar">
+                                <progress class="course__infor__progressBar__progress" value="50" max="100"></progress>
+                                <span class="progress-value">50%</span>
+                            </div>
+                        </div>
+
+                        <div class="course__thumbnail">
+                            <img class="course__thumbnail__img" th:src="@{/assets/courses/course (1).jpg}" alt="course thumbnail"/>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

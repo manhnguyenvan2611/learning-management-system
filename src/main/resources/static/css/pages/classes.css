@@ -1,0 +1,235 @@
+.container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/**
+* class list .section
+*/
+.classList {
+    width: 68.47%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.classList__courseInfor {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/*h2*/
+.classList__courseInfor__heading {
+    font-size: var(--fonts24);
+    font-weight: var(--fontw--medium);
+}
+
+.classList__courseInfor__more {
+    font-size: var(--fonts12);
+    font-weight: var(--fontw--semibold);
+    display: none;
+}
+
+.classList__nav {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.classList__nav__navigateBtn {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(255,255,255,0.5);
+    border: var(--bd1);
+    border-radius: 100%;
+    top: calc((100%- 50px) / 2);
+}
+
+.classList__nav__navigateBtn:nth-child(2) {
+    right: 0;
+}
+
+.classList__nav__btns {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    overflow: hidden;
+}
+
+.classList__nav__btn {
+    padding: 0 20px;
+    height: 50px;
+    border: var(--bd1);
+    border-radius: var(--bdr20);
+    flex-shrink: 0;
+}
+
+.classList__nav__btn:hover {
+    background: var(--comp--purple);
+}
+
+.classList__students {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.classList__students__student {
+    width: 100%;
+    height: 80px;
+    border: var(--bd1);
+    border-radius: var(--bdr20);
+    padding: 0 20px;
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.student__appearence,
+.student__contact {
+    width: 50%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.student__contact {
+    justify-content: flex-end;
+}
+
+.student__appearence__avatar {
+    width: 50px;
+    height: 50px;
+    border: var(--bd1);
+    border-radius: var(--bdr20);
+}
+
+.student__avatar__img {
+    border-radius: var(--bdr20);
+}
+
+.student__name,
+.student__email {
+    font-size: var(--fonts18);
+    font-weight: var(--fontw--medium);
+}
+
+.student__name {
+    max-width: calc(100% - 10px - 50px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.student__learning__status {
+    font-size: var(--fonts12);
+    color: var(--comp--green);
+}
+
+/**
+* course information .section
+*/
+.courseInfor {
+    position: sticky;
+    top: 0;
+    width: calc(100% - 20px - 68.47%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.courseInfor__heading {
+    width: 100%;
+    font-size: var(--fonts18);
+    font-weight: var(--fontw--semibold);
+}
+
+.courseInfor__details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.courseInfor__details__term {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.courseInfor__thumbnail,
+.thumbnail__img {
+    width: 100%;
+    border-radius: var(--bdr20);
+    aspect-ratio: 5 / 4;
+    border: var(--bd1);
+}
+
+.courseInfor__close__btn {
+    font-size: var(--fonts12);
+    font-weight: var(--fontw--semibold);
+    padding: 0 20px;
+    height: 30px;
+    border: var(--bd1);
+    border-radius: var(--bdr20);
+    width: fit-content;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .classList {
+        width: 100%;
+    }
+
+    .classList__courseInfor__more,
+    .courseInfor__close__btn {
+        display: flex;
+    }
+
+    .classList__nav__btns {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        gap: 10px;
+    }
+
+    .classList__nav__btn {
+        scroll-snap-align: start;
+    }
+
+    .courseInfor {
+        width: calc(100% - 40px);
+        position: fixed;
+        top: 120px;
+        left: 20px;
+        right: 20px;
+        padding: 20px;
+        background: var(--bg);
+        border: var(--bd1);
+        border-radius: var(--bdr20);
+        z-index: 100;
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .student__contact {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .student__email {
+        font-size: var(--fonts12);
+    }
+}

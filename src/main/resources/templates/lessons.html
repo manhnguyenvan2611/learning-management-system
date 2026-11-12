@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" 
+    xmlns:th="https://www.thymeleaf.org/"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/variables.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/components/header.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/components/icons.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/pages/lessons.css}" />
+    <script th:src="@{/js/layout/header.js}" defer></script>
+    <script th:src="@{/js/modules/lessonstatus.js}" defer></script>
+    <script th:src="@{/js/lessons.js}" type="module" defer></script>
+    <script th:src="@{/js/javascript.js}" defer></script>
+    <title>Lessons</title>
+</head>
+<body>
+    <script th:inline="javascript">
+        var COURSE_ID = /*[[${course[0].id}]]*/1; 
+        var courseLessons = /*[[${courseLessons}]]*/[]; 
+        var userLessons = /*[[${userLessons}]]*/[]; 
+
+        localStorage.setItem('courseLessons', JSON.stringify(courseLessons));
+    </script>
+    
+    <header class="header">
+        <button class="header__menu__btn">
+            <img class="icon-medium" src="/assets/icons/menu.png" alt="menu"/>
+        </button>
+        <nav class="header__nav nav-left">
+            <a class="header__nav__link" th:href="@{/}">HOME</a>
+            <a class="header__nav__link" href="">ABOUT US</a>
+            <a class="header__nav__link" href="">CONTACT US</a>
+        </nav>
+        <nav class="header__nav">
+            <a class="header__nav__link" th:href="@{/signup}" sec:authorize="isAnonymous()">SIGN UP</a>
+            <a class="header__nav__link" th:href="@{/login}" sec:authorize="isAnonymous()">LOG IN</a>
+            <a class="header__nav__link account-link" th:href="@{/account}" sec:authorize="isAuthenticated()">ACCOUNT</a>
+            <a class="header__nav__link class-link" th:href="@{/classes}" sec:authorize="hasRole('LECTURER')">CLASS</a>
+            <a class="header__nav__link logout-link" th:href="@{/logout}" sec:authorize="isAuthenticated()">LOG OUT</a>
+        </nav>
+    </header>
+
+    <div class="lessonsNoti">
+        <h4 class="lessonsNoti__heading">successfully</h4>
+    </div>
+
+    <div class="enterLessonNoti">
+        <h4 class="enterLessonNoti__heading">text</h4>
+    </div>
+    
+    <div class="loadingContainer">
+        <div class="loading"></div>
+    </div>
+
+    <main class="container">
+        <section class="courseInfor">
+            <div class="courseInfor__details">
+                <h2 class="courseInfor__details__heading" th:text="${course[0].course_name}">
+                    Artificial Intelligence & Machine Learning Introductory Program
+                </h2>
+                <h3 class="courseInfor__details__caption">
+                    Foundation Course - Designed for beginners and enthusiasts
+                </h3>
+                <div class="courseInfor__details__terms">
+                    <time class="courseInfor__details__terms__time" th:text="'Updated on' + ' ' + ${course[0].timestamp}">Updated on Feb, 2026</time>
+                    <div class="courseInfor__details__terms__language">Language: English</div>
+                    <div class="courseInfor__details__terms__author">Phani Avagaddi</div>
+                    <div class="courseInfor__details__terms__category">IT and Software ,Other IT and Software</div>
+                    <div class="courseInfor__details__terms__lectures" th:text="Lectures + ' - ' + ' ' + ${courseLessons.size()}">Lectures - 8</div>
+                    <div class="courseInfor__details__terms__level" th:text="Level + ' ' + ${course[0].level}">Level 1</div>
+                    <div class="courseInfor__details__terms__rating">
+                        <span th:text="${course[0].rate}">4.6</span>
+                        <img class="icon-small" th:src="@{/assets/icons/star.png}" alt="star"/>
+                        <img class="icon-small" th:src="@{/assets/icons/star.png}" alt="star"/>
+                        <img class="icon-small" th:src="@{/assets/icons/star.png}" alt="star"/>
+                        <img class="icon-small" th:src="@{/assets/icons/star.png}" alt="star"/>
+                        <img class="icon-small" th:src="@{/assets/icons/star.png}" alt="star"/>
+                    </div>
+                </div>
+            </div>
+
+            <form class="courseInfor__progress" th:action="@{/register}" method="POST">
+                <h3 class="courseInfor__progress__heading">Progressing</h3>
+                <div class="courseInfor__progress__value">
+                    <h4 class="courseInfor__progress__value__percentage">0%</h4>
+                    <span th:text="${registerStatus}"></span>
+                </div>
+                <input class="status" type="text" name="status" value="in progress" hidden/>
+                <button class="courseInfor__progress__registerBtn" type="button" th:text="${registerState}">
+                    Register
+                </button>
+            </form>
+        </section>
+
+        <section class="courseDescription">
+            <div class="courseDescription__thumbnail">
+                <img class="courseDescription__thumbnail__img" th:src="@{/assets/courses/course-1.jpg}" alt="thumbnail"/>
+            </div>
+
+            <div class="courseDescription__para">
+                <h3 class="courseDescription__para__heading">Course Description</h3>
+                <ul class="courseDescription__para__lists">
+                    <li th:text="${course[0].description}">
+                    </li>
+                    <!-- <li>Implement Machine Learning algorithms</li>
+                    <li>How to improve your Machine Learning Models</li>
+                    <li>Build a portfolio of work to have on your resume</li>
+                    <li>Supervised and Unsupervised Learning</li>
+                    <li>Explore large datasets using data visualization tools like Matplotlib </li>
+                    <li>Learn NumPy and how it is used in Machine Learning</li>
+                    <li>Learn to use the popular library Scikit-learn in your projects</li>
+                    <li>Learn to perform Classification and Regression modelling</li> -->
+                </ul>
+                <button class="description__showmore__btn">Show More</button>
+            </div>
+        </section>
+
+        <section class="courseLessons">
+            <h2 class="courseLessons__heading">Curriculum</h2>
+            <div class="courseLessons__lessons">
+                <form class="courseLessons__lesson"
+                    th:action="@{/joinlesson}"
+                    method="POST"
+                    th:each="courseLesson, status: ${courseLessons}"
+                    th:id="lesson + '-' + ${courseLesson.courseId} + '-' + ${courseLesson.id}">
+                    <!-- th:attr="onclick=|window.location.href='@{/lesson/{id}(id=${courseLesson.id})}'|" -->
+                    <div class="lesson__infor">
+                        <div class="lesson__infor__name" th:text="${courseLesson.lessonName}">AIML - Foundation - Introduction</div>
+                        <div class="lesson__infor__unit" th:text="Lesson + ' ' + ${status.index + 1}">Lesson 1</div>
+                    </div>
+
+                    <div class="lesson__options">
+                        <div class="lesson__options__status">
+                            <img class="icon-medium lock-icon" th:classappend="lesson + '-' + ${courseLesson.courseId} + '-' + ${courseLesson.id}" th:src="@{/assets/icons/locked.png}" alt="unlocked"/>
+                        </div>
+
+                        <!-- <input class="lesson-user-id" type="text" name="userId" value="1" hidden/>
+                        <input class="lesson-course-id" type="text" name="courseId" th:value="${course[0].id}" hidden/> -->
+                        <input class="lesson-lesson-id" type="text" name="lessonId" th:value="${courseLesson.id}" hidden/>
+                        <button class="lesson__options__btn" th:id="${status.index}">
+                            <img class="icon-medium" th:src="@{/assets/icons/play.png}" alt="play"/>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+
+            <button class="courseLessons__testBtn">
+                Bài test
+                <img class="icon-medium" th:src="@{/assets/icons/incomplete.png}" alt="incomplete"/>
+            </button>
+        </section>
+    </main>
+</body>
+</html>
+
